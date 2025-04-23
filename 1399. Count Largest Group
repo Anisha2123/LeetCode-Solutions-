@@ -1,0 +1,37 @@
+
+C++
+=========================================================================================
+class Solution {
+public:
+    int countLargestGroup(int n) {
+        map<int,int>mp; int cnt=0;
+        for(int i=1;i<=n;i++)
+        {
+            int num=i, sum=0;
+            while(num)
+            {
+                int rem=num%10;
+                num=num/10;
+                sum+=rem;
+            }
+            mp[sum]++;
+        }
+        // check the group which has highest element 
+        int maxele=0;
+        for(auto it:mp)
+        {
+            maxele=max(maxele,it.second);
+        }
+        // we will count that how many groups has maxele no of elements 
+        for(auto it:mp)
+        {
+            if(it.second==maxele)
+            cnt++;
+        }
+        return cnt;
+    }
+};
+=========================================================================================
+
+T.C - nlogn
+S.C - logn
