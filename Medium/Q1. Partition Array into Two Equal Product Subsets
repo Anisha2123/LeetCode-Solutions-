@@ -1,0 +1,23 @@
+class Solution {
+public:
+    bool helper(vector<int>& nums, long long target, int i, long long pick, long long  notpick)
+    {
+        if(pick>target || notpick>target)
+            return false;
+        if(i>=nums.size())
+        {
+            if(pick==target && notpick==target)
+                return true;
+            return false;
+        }
+        if(helper(nums,target,i+1,pick*nums[i],notpick)==true)
+            return true;
+        if(helper(nums,target,i+1,pick,notpick*nums[i])==true)
+            return true;
+        return false;
+    }
+    bool checkEqualPartitions(vector<int>& nums, long long target) {
+        sort(nums.rbegin(),nums.rend());
+        return helper(nums,target,0,1,1);
+    }
+};
